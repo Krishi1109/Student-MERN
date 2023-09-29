@@ -7,13 +7,14 @@ exports.newFaculty = async (req, res, next) => {
   try {
     const { name, facultyEmail, password } = req.body;
 
-    const FacultyExist = await Faculty.findOne({ facultyEmail });
-    if (FacultyExist) {
-      return res.status(409).send({
-        status: false,
-        message: "Faculty with givein email is already exist!",
-      });
-    }
+    // const FacultyExist = await Faculty.findOne({ facultyEmail });
+    // if (FacultyExist) {
+    //   console.log(res.error)
+    //   return res.status(409).send({
+    //     status: false,
+    //     message: "Faculty with givein email is already exist!",
+    //   });
+    // }
     const faculty = new Faculty({ name, facultyEmail, password });
     const facultyRegister = await faculty.save();
     return res.status(201).send({
@@ -27,9 +28,10 @@ exports.newFaculty = async (req, res, next) => {
       },
     });
   } catch (err) {
-    return res.status(400).send({
+    // console.log("ffndifubhefyub")
+    return res.status(500).send({
       status: false,
-      message: err.message,
+      message: err,  
     });
   }
 };
